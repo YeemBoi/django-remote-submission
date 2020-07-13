@@ -49,7 +49,7 @@ class ListField(models.TextField):  # noqa: D101
 
         return ast.literal_eval(value)
 
-    def from_db_value(self, value, *args, **kwargs):  # noqa: D102
+    def from_db_value(self, value, expression, connection, *args, **kwargs):  # noqa: D102
         return self.to_python(value)
 
     def get_prep_value(self, value):  # noqa: D102
@@ -59,7 +59,7 @@ class ListField(models.TextField):  # noqa: D101
         return str(value)
 
     def value_to_string(self, obj):  # noqa: D102
-        value = self._get_val_from_obj(obj)
+        value = self.Field_value_from_object(obj)
         return self.get_db_prep_value(value)
 
 
